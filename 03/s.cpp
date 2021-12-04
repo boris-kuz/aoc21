@@ -43,7 +43,7 @@ auto part1(const v_t& binary_input) -> int
 }
 
 template<typename v_t>
-auto part2(v_t input, unsigned bit_to_check, Rating mode) -> v_t
+auto part2(const v_t& input, const unsigned& bit_to_check, const Rating& mode) -> v_t
 {
     if(input.size() == 2)
     {
