@@ -13,7 +13,8 @@ enum class Rating
     Oxygen = 1
 };
 
-auto get_most_used_bit(auto bitset, int bit) -> bool
+template<typename v_t>
+auto get_most_used_bit(const v_t& bitset, const int bit) -> bool
 {
     const auto num_ones{std::transform_reduce(bitset.cbegin()
                                 , bitset.cend()
@@ -25,18 +26,17 @@ auto get_most_used_bit(auto bitset, int bit) -> bool
 }
 
 template<typename v_t>
-auto part1(v_t binary_input) -> int
+auto part1(const v_t& binary_input) -> int
 {
     typename v_t::value_type gamma;
-    typename v_t::value_type epsilon;
 
     for(unsigned bit{0}; bit < binary_input[0].size(); ++bit)
     {
-        auto bit_to_set {get_most_used_bit(binary_input, bit)};
+        const auto bit_to_set {get_most_used_bit(binary_input, bit)};
         gamma[bit] = bit_to_set;
     }
 
-    epsilon = gamma;
+    auto epsilon{gamma};
     epsilon.flip();
 
     return gamma.to_ulong() * epsilon.to_ulong();
@@ -57,7 +57,7 @@ auto part2(v_t input, unsigned bit_to_check, Rating mode) -> v_t
     }
 
     //fallthrough
-    int target_bit {get_most_used_bit(input, bit_to_check)};
+    const int target_bit {get_most_used_bit(input, bit_to_check)};
 
     v_t return_vector;
     std::copy_if(input.cbegin()

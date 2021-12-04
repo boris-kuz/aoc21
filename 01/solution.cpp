@@ -1,12 +1,10 @@
 #include <numeric>
 #include <iostream>
-#include <array>
-#include <vector>
-#include <iterator>
-#include "input.h"
 #include <functional>
+#include "input.h"
 
-int sonar_sweep(auto scan_results, int window_size = 1)
+template<typename v_t>
+auto sonar_sweep(const v_t& scan_results, const int window_size = 1) -> int
 {
     return std::transform_reduce(
         scan_results.cbegin() + window_size,
